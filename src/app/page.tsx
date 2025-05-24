@@ -1,101 +1,142 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import { useEffect, useState } from 'react';
+import Loader from '../components/Loader';
+import Projects from '../components/Projects';
+import React from 'react';
+
+
+const LandingPage = () => {
+  const [showLoader, setShowLoader] = useState(true);
+  const [showInfo, setShowInfo] = useState(false);
+  const [showNav, setShowNav] = useState(false);
+  const [showProjects, setShowProjects] = useState(false);
+  const [selectedTab, setSelectedTab] = useState<'home' | 'projects' | 'contact'>('projects');
+
+  useEffect(() => {
+    const loaderDuration = 5500;
+
+    const loaderTimeout = setTimeout(() => {
+      setShowLoader(false);
+      setShowInfo(true);
+      setTimeout(() => setShowNav(true), 300);
+      setTimeout(() => setShowProjects(true), 600);
+    }, loaderDuration);
+
+    return () => clearTimeout(loaderTimeout);
+  }, []);
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div className="relative min-h-screen bg-white text-black font-mono overflow-hidden">
+      {showLoader && <Loader />}
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+      {!showLoader && (
+        <>
+          {/* Info Panel */}
+          <div
+            className={`fixed z-20 border border-black transform transition-all duration-700 ease-out px-6 py-4  ${
+              selectedTab === 'contact'
+                ? 'left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[95%] h-[90%] opacity-0 pointer-events-none' 
+                : 'left-12 top-12 right-12 bottom-12 opacity-100 pointer-events-none'
+            }`}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+
+            <div className='px-2 py-2'>
+            <h1 className="text-5xl font-bold bg-gradient-to-r from-gray-300 via-black to-gray-300 bg-[length:200%_100%] bg-clip-text text-transparent animate-shine">
+              MONDO
+            </h1>
+            <p className="text-sm text-gray-600">inspiring designer and developer</p>
+            </div>
+          </div>
+
+
+
+          {/* Navigation */}
+          <div className="fixed z-10 top-5 left-12 text-left flex space-x-4"
           >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+            {['home', 'projects', 'contact'].map((tab) => (
+              <div
+                key={tab}
+                onClick={() => setSelectedTab(tab as 'home' | 'projects' | 'contact')}
+                className={`mb-2 cursor-pointer hover:underline ${
+                  selectedTab === tab ? 'underline font-bold' : ''
+                }`}
+              >
+                {tab.charAt(0).toUpperCase() + tab.slice(1)}
+              </div>
+            ))}
+          </div>
+
+          {/* Content based on selected tab */}
+          {selectedTab === 'projects' && (
+            <div className="fixed left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 h-full w-1/2 px-4">
+              <Projects />
+            </div>
+          )}
+
+          {selectedTab === 'home' && (
+            <div className="fixed left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1/2 px-4 text-2xl font-semibold text-center">
+              <p>hi!</p>
+            </div>
+          )}
+
+          {selectedTab === 'contact' && (
+            <div>
+                <div className="fixed left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col font-bold text-sm text-center items-center">
+                <a
+                  href="mailto:aprildagdagan97@gmail.com"
+                  className="flex items-center space-x-1  text-black hover:text-gray-600 hover:underline transition-colors"
+                >
+                  <span>email</span>
+                  <span className="text-xs">↗</span>
+                </a>
+                <a
+                  href="https://github.com/Renchisan"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center space-x-1 text-black hover:text-gray-600 hover:underline transition-colors"
+                >
+                  <span>github</span>
+                  <span className="text-xs">↗</span>
+                </a>
+
+                <a
+                  href="https://gitlab.com/Renchisan"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center space-x-1 text-black hover:text-gray-600 hover:underline transition-colors"
+                >
+                  <span>gitlab</span>
+                  <span className="text-xs">↗</span>
+                </a>
+
+                <a
+                  href="https://instagram.com/eprelkk"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center space-x-1 text-black hover:text-gray-600 hover:underline transition-colors"
+                >
+                  <span>instagram</span>
+                  <span className="text-xs">↗</span>
+                </a>
+
+                {/* <a
+                  href="https://linkedin.com/in/yourusername"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center space-x-1 text-black hover:text-gray-600 hover:underline transition-colors"
+                >
+                  <span>LinkedIn</span>
+                  <span className="text-xs">↗</span>
+                </a> */}
+              </div>           
+            </div>
+
+          )}
+        </>
+      )}
     </div>
   );
-}
+};
+
+export default LandingPage;

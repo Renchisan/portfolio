@@ -1,0 +1,8 @@
+.swiper-slide-custom {
+  transition: transform 0.3s ease;
+}
+
+.swiper-slide-custom.swiper-slide-active {
+  transform: scale(1.2);
+  z-index: 10;
+}
