@@ -8,6 +8,7 @@ import React from 'react';
 
 const LandingPage = () => {
   const [showLoader, setShowLoader] = useState(true);
+  const [showProjects, setShowProjects] = useState(false);
   const [selectedTab, setSelectedTab] = useState<'home' | 'projects' | 'contact'>('projects');
 
   useEffect(() => {
@@ -15,6 +16,9 @@ const LandingPage = () => {
 
     const loaderTimeout = setTimeout(() => {
       setShowLoader(false);
+      setTimeout(() => {
+      setShowProjects(true);
+    }, 1000);
     }, loaderDuration);
 
     return () => clearTimeout(loaderTimeout);
@@ -62,8 +66,8 @@ const LandingPage = () => {
           </div>
 
           {/* Selected tab */}
-          {selectedTab === 'projects' && (
-            <div className="fixed left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 h-full w-full px-24">
+          {selectedTab === 'projects' && showProjects &&  (
+            <div className="fixed items-start right-0 top-1/2 transform -translate-y-1/2 h-full w-[60%] py-12 px-12">
               <Projects />
             </div>
           )}

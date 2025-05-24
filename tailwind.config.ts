@@ -38,8 +38,8 @@ export default {
           '100%': {
             backgroundPosition: '-100% center', // Hold the final state (pause)
           },
-
         },
+        
       },
       colors: {
         background: "var(--background)",

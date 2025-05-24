@@ -14,6 +14,13 @@ const projectData = [
     live: 'https://strays-connect.vercel.app/',
     tools: ['Laravel', 'Vue', 'TailwindCSS', 'MySQL'],
   },
+  // {
+  //   title: 'Lia',
+  //   video: '/videos/lia-preview.mp4',
+  //   github: 'https://github.com/your/strays-connect',
+  //   live: 'https://strays-connect.vercel.app/',
+  //   tools: ['Flutter Flow'],
+  // },
   {
     title: 'Smart Student Management System',
     video: '/videos/ssms-preview.mp4',
@@ -34,6 +41,7 @@ const Projects = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
+    
     <Swiper
       modules={[EffectCoverflow]}
       direction="vertical"
@@ -43,47 +51,56 @@ const Projects = () => {
       loop={true}
       centeredSlides={true}
       grabCursor={true}
+      onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
       coverflowEffect={{
         rotate: 0,
         stretch: 0,
         depth: 100,
         modifier: 1,
         slideShadows: false,
-        scale: 0.8,
+        scale: 1,
       }}
       className="mySwiper h-full"
-      onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)} // update active slide index
     >
       {projectData.map((project, i) => (
         <SwiperSlide
-          key={i}
-          className="swiper-slide-custom flex flex-col items-center justify-center rounded-lg bg-white relative w-full  "
-        >
-          {activeIndex === i ? (
-            <>
-              {/* Show full content when active */}
-              <video
-                src={project.video}
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="h-full object-contain"
-              />
-              <div className='flex flex-col w-full font-mono absolute bottom-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white z-20'>
-                {/* <span className='text-7xl text-bold text-sm '> {project.title}</span> */}
-                {/* <span className='text-bold text-sm '> {project.tools.join(', ')}</span> */}
+  key={i}
+  className="swiper-slide-custom w-full h-[500px] flex items-start justify-start px-6"
+>
+  <div
+    className={`flex flex-row w-full h-full items-start gap-6 transition-all duration-500 ${
+      activeIndex === i ? 'scale-105' : 'scale-90'
+    }`}
+  >
+    {/* Fixed-size video container */}
+    <div className="w-full h-full flex items-center justify-center">
+      <video
+        src={project.video}
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="h-auto w-auto object-contain rounded-lg"
+      />
+    </div>
 
-              </div>
-             
-            </>
-          ) : (
-            /* Show just the title when not active */
-            <div className='bg-gray-100 items-center h-full w-full'>
-                next
-            </div>
-          )}
-        </SwiperSlide>
+    {/* Info section */}
+    <div className="w-1/2 h-full flex flex-col justify-center text-white">
+      <h2 className="text-xl font-bold font-mono mb-4 text-black">{project.title}</h2>
+      <div className="flex flex-wrap gap-2">
+        {project.tools.map((tool, idx) => (
+          <span
+            key={idx}
+            className="px-3 py-1 bg-gray-700 rounded-full text-sm"
+          >
+            {tool}
+          </span>
+        ))}
+      </div>
+    </div>
+  </div>
+</SwiperSlide>
+
       ))}
     </Swiper>
   );
