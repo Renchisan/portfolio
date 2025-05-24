@@ -43,7 +43,7 @@ const LandingPage = () => {
             <h1 className="text-5xl font-bold bg-gradient-to-r from-gray-300 via-black to-gray-300 bg-[length:200%_100%] bg-clip-text text-transparent animate-shine">
               MONDO
             </h1>
-            <p className="text-sm text-gray-600">inspiring designer and developer</p>
+            <p className="text-sm text-gray-600">designing interfaces and developing solutions</p>
             </div>
           </div>
 
