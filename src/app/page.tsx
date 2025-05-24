@@ -21,7 +21,7 @@ const LandingPage = () => {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-white text-black font-mono overflow-hidden">
+    <div className="relative min-h-screen bg-white text-black font-mono ">
       {showLoader && <Loader />}
 
       {!showLoader && (
@@ -63,7 +63,7 @@ const LandingPage = () => {
 
           {/* Selected tab */}
           {selectedTab === 'projects' && (
-            <div className="fixed left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 h-full w-1/2 px-4">
+            <div className="fixed left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 h-full w-full px-24">
               <Projects />
             </div>
           )}
