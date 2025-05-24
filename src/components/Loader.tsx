@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 const Loader = () => {
   const [text, setText] = useState('');
-  // const [stage, setStage] = useState<'typing' | 'outro'>('typing');
+  const [_stage, setStage] = useState<'typing' | 'outro'>('typing');
   const [fadeOut, setFadeOut] = useState(false);
 
   useEffect(() => {
@@ -15,7 +15,7 @@ const Loader = () => {
       current++;
       if (current === fullText.length) {
         clearInterval(typing);
-        // setTimeout(() => setStage('outro'), 700);
+        setTimeout(() => setStage('outro'), 700);
         setTimeout(() => setFadeOut(true), 700); // trigger fade out
       }
     }, 300);
