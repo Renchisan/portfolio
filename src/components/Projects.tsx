@@ -7,9 +7,9 @@ import 'swiper/css/effect-coverflow';
 import '../styles/swiper-custom.css';
 
 const Projects = () => {
-  const [text, setText] = useState('');
-  const [stage, setStage] = useState<'typing' | 'outro'>('typing');
-  const [fadeOut, setFadeOut] = useState(false);
+//   const [text, setText] = useState('');
+//   const [stage, setStage] = useState<'typing' | 'outro'>('typing');
+//   const [fadeOut, setFadeOut] = useState(false);
 
   useEffect(() => {
     const fullText = '@mondo';

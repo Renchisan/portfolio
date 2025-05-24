@@ -8,9 +8,9 @@ import React from 'react';
 
 const LandingPage = () => {
   const [showLoader, setShowLoader] = useState(true);
-  const [showInfo, setShowInfo] = useState(false);
-  const [showNav, setShowNav] = useState(false);
-  const [showProjects, setShowProjects] = useState(false);
+  // const [showInfo, setShowInfo] = useState(false);
+  // const [showNav, setShowNav] = useState(false);
+  // const [showProjects, setShowProjects] = useState(false);
   const [selectedTab, setSelectedTab] = useState<'home' | 'projects' | 'contact'>('projects');
 
   useEffect(() => {
@@ -18,9 +18,9 @@ const LandingPage = () => {
 
     const loaderTimeout = setTimeout(() => {
       setShowLoader(false);
-      setShowInfo(true);
-      setTimeout(() => setShowNav(true), 300);
-      setTimeout(() => setShowProjects(true), 600);
+      // setShowInfo(true);
+      // setTimeout(() => setShowNav(true), 300);
+      // setTimeout(() => setShowProjects(true), 600);
     }, loaderDuration);
 
     return () => clearTimeout(loaderTimeout);
@@ -67,7 +67,7 @@ const LandingPage = () => {
             ))}
           </div>
 
-          {/* Content based on selected tab */}
+          {/* Selected tab */}
           {selectedTab === 'projects' && (
             <div className="fixed left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 h-full w-1/2 px-4">
               <Projects />
@@ -82,7 +82,7 @@ const LandingPage = () => {
 
           {selectedTab === 'contact' && (
             <div>
-                <div className="fixed left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col font-bold text-sm text-center items-center">
+                <div className=" fixed  left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col font-bold text-sm text-center items-center">
                 <a
                   href="mailto:aprildagdagan97@gmail.com"
                   className="flex items-center space-x-1  text-black hover:text-gray-600 hover:underline transition-colors"
@@ -121,7 +121,7 @@ const LandingPage = () => {
                 </a>
 
                 {/* <a
-                  href="https://linkedin.com/in/yourusername"
+                  href="https://linkedin.com/in/april"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center space-x-1 text-black hover:text-gray-600 hover:underline transition-colors"
