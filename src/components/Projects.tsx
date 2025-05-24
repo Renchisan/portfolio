@@ -7,26 +7,6 @@ import 'swiper/css/effect-coverflow';
 import '../styles/swiper-custom.css';
 
 const Projects = () => {
-  const [_text, setText] = useState('');
-  const [_stage, setStage] = useState<'typing' | 'outro'>('typing');
-  const [_fadeOut, setFadeOut] = useState(false);
-
-  useEffect(() => {
-    const fullText = '@mondo';
-    let current = 0;
-
-    const typing = setInterval(() => {
-      setText(fullText.slice(0, current + 1));
-      current++;
-      if (current === fullText.length) {
-        clearInterval(typing);
-        setTimeout(() => setStage('outro'), 700);
-        setTimeout(() => setFadeOut(true), 700); // trigger fade out
-      }
-    }, 300);
-
-    return () => clearInterval(typing);
-  }, []);
 
   return (
     <Swiper

@@ -8,9 +8,6 @@ import React from 'react';
 
 const LandingPage = () => {
   const [showLoader, setShowLoader] = useState(true);
-  const [_showInfo, setShowInfo] = useState(false);
-  const [_showNav, setShowNav] = useState(false);
-  const [_showProjects, setShowProjects] = useState(false);
   const [selectedTab, setSelectedTab] = useState<'home' | 'projects' | 'contact'>('projects');
 
   useEffect(() => {
@@ -18,9 +15,6 @@ const LandingPage = () => {
 
     const loaderTimeout = setTimeout(() => {
       setShowLoader(false);
-      setShowInfo(true);
-      setTimeout(() => setShowNav(true), 300);
-      setTimeout(() => setShowProjects(true), 600);
     }, loaderDuration);
 
     return () => clearTimeout(loaderTimeout);
